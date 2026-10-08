@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Andy's Italy Flights</title>
+<meta name="description" content="Business class options for Andy and family, Memphis to Rome and Venice to Memphis, June 26 to July 4, 2027.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: full-screen slide deck, one idea per slide, navy night-cabin palette with brass accents */
+:root{
+  color-scheme:dark;
+  --navy:#141a26; --navy-2:#1b2230; --navy-3:#252c3c;
+  --gold:#c9a96e; --gold-2:#d9bd86; --gold-deep:#a8834a;
+  --ink:#f4f1ea; --muted:#aab1c0; --dim:#7d8597;
+  --sky:#7fb4e6; --ok:#7fd1a8; --warn:#e8a87c;
+  --bg:var(--navy);
+}
+*{box-sizing:border-box}
+body,h1,h2,h4,h5,p,ul{margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+a{color:inherit}
+.serif{font-family:Fraunces,Georgia,serif}
+
+/* deck */
+.deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility 0s linear .7s;overflow:hidden}
+.slide.on{opacity:1;visibility:visible;transition:opacity .7s ease,visibility 0s}
+.bg{position:absolute;inset:-4%;background-size:cover;background-position:center;transform:scale(1.02);transition:transform 14s ease-out}
+.slide.on .bg{transform:scale(1.12)}
+.shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,26,38,.94) 0%,rgba(20,26,38,.78) 42%,rgba(20,26,38,.25) 100%)}
+.shade.full{background:rgba(20,26,38,.72)}
+.shade.bottom{background:linear-gradient(0deg,rgba(20,26,38,.96) 0%,rgba(20,26,38,.6) 45%,rgba(20,26,38,.1) 100%)}
+.wrap{position:relative;width:min(1180px,100%);padding:72px 56px 96px;max-height:100%;overflow-y:auto;scrollbar-width:none}
+.wrap::-webkit-scrollbar{display:none}
+
+/* entrance */
+[data-a]{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.slide.on [data-a]{opacity:1;transform:none}
+.slide.on [data-a="1"]{transition-delay:.15s}.slide.on [data-a="2"]{transition-delay:.35s}
+.slide.on [data-a="3"]{transition-delay:.55s}.slide.on [data-a="4"]{transition-delay:.75s}
+.slide.on [data-a="5"]{transition-delay:.95s}.slide.on [data-a="6"]{transition-delay:1.15s}
+.slide.on [data-a="7"]{transition-delay:1.35s}.slide.on [data-a="8"]{transition-delay:1.55s}
+
+.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
+h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(34px,5.6vw,68px);line-height:1.05;letter-spacing:-.01em;margin-top:14px}
+h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(28px,4vw,48px);line-height:1.1;margin-top:12px}
+.lead{font-size:clamp(17px,1.6vw,21px);line-height:1.55;color:#dfe3ea;margin-top:18px;max-width:640px}
+.small{font-size:13px;color:var(--muted);line-height:1.5}
+.gold{color:var(--gold-2)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:rgba(201,169,110,.14);border:1px solid rgba(201,169,110,.45);color:var(--gold-2);font-size:13px;font-weight:600}
+.row{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
+
+/* stat tiles */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:30px;max-width:900px}
+.stat{background:rgba(37,44,60,.72);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 16px 14px;backdrop-filter:blur(6px)}
+.stat b{display:block;font-family:Fraunces,Georgia,serif;font-size:28px;font-weight:600;color:#fff}
+.stat span{font-size:13px;color:var(--muted);line-height:1.4;display:block;margin-top:4px}
+
+/* timeline */
+.tl{margin-top:26px;max-width:760px}
+.leg{display:grid;grid-template-columns:96px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.leg:last-child{border-bottom:0}
+.leg .t{font-weight:700;font-size:18px;color:#fff}
+.leg .t small{display:block;font-weight:500;font-size:12px;color:var(--dim);margin-top:2px}
+.leg h4{font-size:18px;font-weight:600;color:#fff}
+.leg p{font-size:14.5px;color:#cfd4de;line-height:1.5;margin-top:3px}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:6px;padding:3px 7px;margin-left:8px;vertical-align:2px}
+.tag.flat{background:rgba(127,209,168,.16);color:var(--ok)}
+.tag.eu{background:rgba(127,180,230,.16);color:var(--sky)}
+.tag.ec{background:rgba(170,177,192,.16);color:var(--muted)}
+.tag.pe{background:rgba(232,168,124,.16);color:var(--warn)}
+.stop{display:grid;grid-template-columns:96px 1fr;gap:18px;padding:10px 0}
+.stop div:last-child{background:rgba(201,169,110,.1);border-left:3px solid var(--gold);border-radius:6px;padding:9px 13px;font-size:14px;color:#e9dcc2;line-height:1.45}
+
+/* two column */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+.photo{border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45);position:relative}
+.photo img{display:block;width:100%;height:auto}
+.photo .cap{position:absolute;left:0;right:0;bottom:0;padding:10px 14px;font-size:11px;color:#d3d7df;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent)}
+ul.ticks{list-style:none;margin-top:20px}
+ul.ticks li{position:relative;padding:8px 0 8px 30px;font-size:16px;line-height:1.45;color:#e3e6ec}
+ul.ticks li:before{content:"";position:absolute;left:2px;top:13px;width:14px;height:8px;border-left:2.5px solid var(--gold);border-bottom:2.5px solid var(--gold);transform:rotate(-45deg)}
+
+/* seat map */
+.mapbox{position:relative;width:min(100%,420px);margin:0 auto;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.mapbox img{display:block;width:100%;height:auto}
+.ring{position:absolute;border-radius:12px;border:3px solid var(--gold-deep);box-shadow:0 0 0 0 rgba(201,169,110,.7);opacity:0;transform:scale(.6);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.9,.3,1.3)}
+.ring.kid{border-color:#1f6eaa;box-shadow:0 0 0 0 rgba(31,110,170,.6)}
+.slide.on .ring{opacity:1;transform:none;animation:pulse 2.2s ease-out 1.4s infinite}
+.slide.on .ring.r2{transition-delay:.9s}.slide.on .ring.r3{transition-delay:1.2s}.slide.on .ring.r1{transition-delay:.6s}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(201,169,110,.55)}70%{box-shadow:0 0 0 14px rgba(201,169,110,0)}100%{box-shadow:0 0 0 0 rgba(201,169,110,0)}}
+.ring .lbl{position:absolute;left:50%;top:-30px;transform:translateX(-50%);white-space:nowrap;background:var(--gold-deep);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px}
+.ring.kid .lbl{background:#1f6eaa}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px}
+.legend span{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:#dfe3ea}
+.legend i{width:16px;height:16px;border-radius:5px;border:3px solid var(--gold-deep)}
+.legend i.k{border-color:#1f6eaa}
+.credit{font-size:11px;color:var(--dim);margin-top:10px}
+
+/* route */
+.route{width:100%;max-width:1060px;margin-top:18px}
+.route path.arc{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1.6s ease}
+.slide.on .route path.arc{stroke-dashoffset:0}
+.slide.on .route path.d2{transition-delay:.6s}.slide.on .route path.d3{transition-delay:1.2s}
+.slide.on .route path.d4{transition-delay:1.9s}.slide.on .route path.d5{transition-delay:2.5s}.slide.on .route path.d6{transition-delay:3.1s}
+.route circle{fill:#fff}
+.route text{font:600 15px Inter,sans-serif;fill:#e9ecf2}
+.route text.c{font-size:12px;font-weight:500;fill:var(--muted)}
+.keyrow{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;color:#dfe3ea;margin-top:6px}
+.keyrow i{display:inline-block;width:26px;height:3px;border-radius:2px;vertical-align:middle;margin-right:8px}
+
+/* price compare */
+.bars{margin-top:26px;max-width:860px}
+.bar{margin:14px 0}
+.bar .top{display:flex;justify-content:space-between;gap:12px;font-size:15px;color:#e3e6ec}
+.bar .top b{font-variant-numeric:tabular-nums}
+.bar .track{height:14px;background:rgba(255,255,255,.07);border-radius:999px;margin-top:7px;overflow:hidden}
+.bar .fill{height:100%;width:0;border-radius:999px;background:#5b6477;transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
+.bar.you .fill{background:linear-gradient(90deg,var(--gold-deep),var(--gold-2))}
+.bar.you .top{color:#fff;font-weight:700}
+.bar .note{font-size:12.5px;color:var(--dim);margin-top:5px;line-height:1.4}
+.big{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(46px,8vw,96px);line-height:1;color:var(--gold-2);font-variant-numeric:tabular-nums}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:26px}
+.card{background:rgba(37,44,60,.8);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:18px}
+.card h5{font-size:16px;color:#fff;font-weight:700}
+.card p{font-size:14px;color:#cfd4de;line-height:1.5;margin-top:6px}
+.card.warn{border-color:rgba(232,168,124,.4)}
+
+/* CTA */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:17px 30px;border-radius:12px;font-weight:700;font-size:18px;text-decoration:none;transition:transform .15s ease,box-shadow .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn.gold{background:var(--gold);color:var(--navy);box-shadow:0 12px 34px rgba(201,169,110,.35)}
+.btn.ghost{border:2px solid rgba(255,255,255,.5);color:#fff}
+.btn.gold.pulse{animation:cta 2.4s ease-in-out 1.6s infinite}
+@keyframes cta{0%,100%{box-shadow:0 12px 34px rgba(201,169,110,.35)}50%{box-shadow:0 12px 50px rgba(201,169,110,.7)}}
+.price{font-family:Fraunces,Georgia,serif;font-size:clamp(40px,6vw,72px);font-weight:700;color:#fff;line-height:1}
+.price small{font-family:Inter,sans-serif;font-size:18px;font-weight:500;color:var(--muted)}
+.others{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.others a{font-size:14px;color:var(--gold-2);text-decoration:none;border-bottom:1px solid rgba(201,169,110,.4);padding-bottom:2px}
+
+/* chrome */
+.top-bar{position:fixed;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;padding:16px 24px;z-index:5;pointer-events:none}
+.top-bar img{height:26px;width:auto;pointer-events:auto}
+.top-bar .who{font-size:12px;color:var(--muted);letter-spacing:.06em}
+.nav{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;gap:14px;padding:14px 22px calc(14px + env(safe-area-inset-bottom));z-index:5;background:linear-gradient(0deg,rgba(20,26,38,.9),rgba(20,26,38,0))}
+.nav button{appearance:none;border:1px solid rgba(255,255,255,.22);background:rgba(37,44,60,.85);color:#fff;border-radius:10px;height:42px;min-width:42px;padding:0 14px;font:600 14px Inter,sans-serif;cursor:pointer}
+.nav button:hover{border-color:var(--gold)}
+.progress{flex:1;height:4px;background:rgba(255,255,255,.12);border-radius:4px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--gold);transition:width .5s ease}
+.count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:48px;text-align:right}
+.hint{position:fixed;right:24px;bottom:72px;font-size:12px;color:var(--dim);z-index:5}
+
+@media (max-width:860px){
+  .wrap{padding:64px 16px 104px}
+  .split{grid-template-columns:1fr;gap:22px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cards{grid-template-columns:1fr}
+  .leg,.stop{grid-template-columns:72px 1fr;gap:12px}
+  .shade{background:linear-gradient(0deg,rgba(20,26,38,.97) 0%,rgba(20,26,38,.88) 48%,rgba(20,26,38,.2) 78%,rgba(20,26,38,.35) 100%)}
+  .slide:has(.shade:not(.full)){align-items:flex-end}
+  .hint{display:none}
+  .mapbox{width:min(100%,340px)}
+  .btn{width:100%}
+  .route text{font-size:22px}.route text.c{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*:before,*:after{transition-duration:.01s!important;animation:none!important}
+}
+</style>
+<div class="top-bar">
+  <img src="assets/bt-logo.png" alt="Business Tickets">
+  <div class="who" id="who">Prepared by Teddy Myers</div>
+</div>
+
+<main class="deck" id="deck"></main>
+
+<div class="hint">Use &larr; &rarr; or tap the sides</div>
+<nav class="nav">
+  <button id="prev" aria-label="Previous slide">&larr;</button>
+  <button id="play" aria-label="Play slideshow">&#9654; Play</button>
+  <div class="progress"><i id="bar"></i></div>
+  <div class="count" id="count">1 / 1</div>
+  <button id="next" aria-label="Next slide">&rarr;</button>
+</nav>
+
+<!-- ====================== TAP + LUFTHANSA (PQ 2151029) ====================== -->
+<template id="deck-tap">
+<section class="slide">
+  <div class="bg" style="background-image:url(assets/tap-flatbed.jpg)"></div><div class="shade"></div>
+  <div class="wrap">
+    <div class="kicker" data-a="1">For Andy and family &middot; Italy, summer 2027</div>
+    <h1 data-a="2">Lie-flat beds<br>both ways across<br>the Atlantic.</h1>
+    <p class="lead" data-a="3">Memphis to Rome on Saturday, June 26. Venice back to Memphis on Sunday, July 4. Five seats in business class on TAP Air Portugal out and Lufthansa home.</p>
+    <div class="row" data-a="4"><span class="pill">$4,710 per person</span><span class="pill">$23,550 for all five</span></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">The trip at a glance</div>
+    <h2 data-a="2">Out through Lisbon. Home through Frankfurt.</h2>
+    <svg class="route" viewBox="0 -10 1250 370" data-a="3" aria-label="Route map">
+      <path class="arc d1" style="--len:120" stroke="#c9a96e" d="M100 273 Q 104 220 121 182"/>
+      <path class="arc d2" style="--len:900" stroke="#c9a96e" d="M121 182 Q 515 20 909 223"/>
+      <path class="arc d3" style="--len:260" stroke="#c9a96e" d="M909 223 Q 1015 160 1122 185"/>
+      <path class="arc d4" style="--len:120" stroke="#7fb4e6" d="M1123 137 Q 1110 95 1086 78"/>
+      <path class="arc d5" style="--len:1050" stroke="#7fb4e6" d="M1086 78 Q 600 -60 121 182"/>
+      <path class="arc d6" style="--len:120" stroke="#7fb4e6" d="M121 182 Q 96 225 100 273"/>
+      <circle cx="100" cy="273" r="6"/><text x="70" y="305">Memphis</text>
+      <circle cx="121" cy="182" r="5"/><text x="140" y="200">Chicago</text>
+      <circle cx="909" cy="223" r="5"/><text x="850" y="255">Lisbon</text>
+      <circle cx="1122" cy="185" r="6"/><text x="1090" y="222">Rome</text>
+      <circle cx="1123" cy="137" r="6"/><text x="1140" y="128">Venice</text>
+      <circle cx="1086" cy="78" r="5"/><text x="990" y="70">Frankfurt</text>
+      <text class="c" x="470" y="125">Overnight on TAP, lie-flat</text>
+      <text class="c" x="520" y="30">Daytime on Lufthansa, lie-flat</text>
+    </svg>
+    <div class="keyrow" data-a="4"><span><i style="background:#c9a96e"></i>Saturday, June 26 out</span><span><i style="background:#7fb4e6"></i>Sunday, July 4 home</span></div>
+    <div class="stats">
+      <div class="stat" data-a="5"><b>2</b><span>ocean crossings, both in a flat bed</span></div>
+      <div class="stat" data-a="6"><b>34</b><span>business seats on the TAP plane, every one on the aisle</span></div>
+      <div class="stat" data-a="7"><b>5:36 PM</b><span>home in Memphis on the Fourth of July</span></div>
+      <div class="stat" data-a="8"><b>$4,983</b><span>less for five than the cheapest business fare online with checked bags</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">Day one &middot; Saturday, June 26</div>
+    <h2 data-a="2">Memphis to Lisbon</h2>
+    <div class="tl">
+      <div class="leg" data-a="3"><div class="t">10:32 AM<small>Memphis</small></div><div><h4>Memphis to Chicago O'Hare <span class="tag ec">Economy</span></h4><p>American Eagle, Embraer 175. 1h 57m. Land 12:29 PM in Terminal 3.</p></div></div>
+      <div class="stop" data-a="4"><div></div><div><strong>5h 46m in Chicago.</strong> This short hop is its own ticket, so you collect your bags, walk over to Terminal 5 and check in with TAP. There is plenty of time for that, and for a sit-down lunch as a family.</div></div>
+      <div class="leg" data-a="5"><div class="t">6:15 PM<small>Chicago</small></div><div><h4>Chicago to Lisbon, TAP 244 <span class="tag flat">Lie-flat business</span></h4><p>Airbus A330-900neo. 8h 10m overnight. Dinner, then the seats go fully flat. Land 8:25 AM Sunday.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap split">
+    <div>
+      <div class="kicker" data-a="1">The overnight seat &middot; TAP A330-900neo</div>
+      <h2 data-a="2">Everyone gets a real bed, and their own way out.</h2>
+      <ul class="ticks">
+        <li data-a="3"><strong>Fully flat.</strong> Pillow and a soft duvet, so the kids sleep and arrive in Europe ready for the day.</li>
+        <li data-a="4"><strong>Every seat opens straight to the aisle.</strong> Nobody climbs over anybody at 3 AM.</li>
+        <li data-a="5"><strong>Only 34 seats</strong> in the whole business cabin, laid out 1-2-1.</li>
+        <li data-a="6"><strong>500+ TV shows and 100+ films</strong> on a personal screen, with noise-cancelling headphones.</li>
+        <li data-a="7"><strong>A young aircraft type.</strong> TAP was the first airline in the world to fly the A330-900neo, from 2018. Airbus built its cabin to be quieter.</li>
+      </ul>
+    </div>
+    <div class="photo" data-a="3"><img src="assets/tap-flatbed.jpg" alt="TAP business class seat in bed mode"><div class="cap">TAP Air Portugal business class, A330-900neo. Photo: TAP Air Portugal</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap split">
+    <div class="mapbox" data-a="2">
+      <img src="assets/tap-a330neo-business-map.jpg" alt="TAP A330-900neo business class seat map">
+      <div class="ring r1" style="left:38.1%;top:36%;width:24.4%;height:7.9%"><span class="lbl">Mom &amp; Dad</span></div>
+      <div class="ring kid r2" style="left:38.1%;top:52.8%;width:24.4%;height:7.9%"><span class="lbl">Kids</span></div>
+      <div class="ring kid r3" style="left:23.1%;top:52.8%;width:12.5%;height:7.9%"></div>
+    </div>
+    <div>
+      <div class="kicker" data-a="1">How I would seat your family</div>
+      <h2 data-a="2">Side by side, one row apart.</h2>
+      <p class="lead" data-a="3">The middle seats in rows 3 and 5 sit right next to each other. You and your wife take the pair in row 3. Two of the kids take the pair in row 5, and the third gets the window seat right beside them.</p>
+      <div class="legend" data-a="4"><span><i></i>Parents, row 3 middle</span><span><i class="k"></i>Kids, row 5 middle and window</span></div>
+      <p class="small" data-a="5" style="margin-top:16px">Seats are chosen when we ticket, from what is open that day. I will ask for this block first.</p>
+      <p class="credit" data-a="5">Seat map: AeroLOPA, TAP Air Portugal Airbus A330-900neo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="bg" style="background-image:url(assets/tap-breakfast.jpg)"></div><div class="shade"></div>
+  <div class="wrap">
+    <div class="kicker" data-a="1">On board</div>
+    <h2 data-a="2">Dinner over the Atlantic.<br>Breakfast before Lisbon.</h2>
+    <p class="lead" data-a="3">TAP's business menu comes from Portuguese chefs, served on Vista Alegre porcelain, with Portuguese wines for the two of you. And yes, that is a pastel de nata on the breakfast tray.</p>
+    <p class="small" data-a="4" style="margin-top:14px">Photo: TAP Air Portugal. The menu changes by season.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="bg" style="background-image:url(assets/tap-wine.jpg)"></div><div class="shade full"></div>
+  <div class="wrap">
+    <div class="kicker" data-a="1">Sunday, June 27</div>
+    <h2 data-a="2">Lisbon, then Rome by late afternoon.</h2>
+    <div class="tl">
+      <div class="leg" data-a="3"><div class="t">8:25 AM<small>Lisbon</small></div><div><h4>Arrive Lisbon</h4><p>Terminal 1. You stay in the same terminal for Rome.</p></div></div>
+      <div class="stop" data-a="4"><div></div><div><strong>4h 20m in Lisbon.</strong> Freshen up and get some breakfast. Your business tickets include TAP's lounge.</div></div>
+      <div class="leg" data-a="5"><div class="t">12:45 PM<small>Lisbon</small></div><div><h4>Lisbon to Rome, TAP 834 <span class="tag eu">European business</span></h4><p>Airbus A321neo. 3h. On flights inside Europe, business is a regular seat with the middle one kept empty, plus a meal and priority boarding.</p></div></div>
+      <div class="leg" data-a="6"><div class="t">4:45 PM<small>Rome</small></div><div><h4>Arrive Rome Fiumicino</h4><p>Your Italy trip starts Sunday evening.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="bg" style="background-image:url(assets/lh-window.jpg)"></div><div class="shade full"></div>
+  <div class="wrap">
+    <div class="kicker" data-a="1">Coming home &middot; Sunday, July 4</div>
+    <h2 data-a="2">Venice to Memphis, home for dinner.</h2>
+    <div class="tl">
+      <div class="leg" data-a="3"><div class="t">6:40 AM<small>Venice</small></div><div><h4>Venice to Frankfurt, LH 333 <span class="tag eu">European business</span></h4><p>Lufthansa Airbus A321. 1h 30m. An early start, which is what gets you home the same day.</p></div></div>
+      <div class="stop" data-a="4"><div></div><div><strong>2h 40m in Frankfurt.</strong> Same terminal, with Lufthansa's business lounge for breakfast.</div></div>
+      <div class="leg" data-a="5"><div class="t">10:50 AM<small>Frankfurt</small></div><div><h4>Frankfurt to Chicago, LH 430 <span class="tag flat">Lie-flat business</span></h4><p>Boeing 747-8, the Queen of the Skies. 9h 05m in daylight. Land 12:55 PM.</p></div></div>
+      <div class="stop" data-a="6"><div></div><div><strong>2h 45m in Chicago.</strong> Clear US customs, re-check bags for the separate Memphis ticket, walk to Terminal 3.</div></div>
+      <div class="leg" data-a="7"><div class="t">3:40 PM<small>Chicago</small></div><div><h4>Chicago to Memphis <span class="tag ec">Economy</span></h4><p>American Eagle, Embraer 175. Land 5:36 PM. Home on the Fourth of July with the evening still ahead.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap split">
+    <div>
+      <div class="kicker" data-a="1">The flight home &middot; Lufthansa 747-8 upper deck</div>
+      <h2 data-a="2">Upstairs on the jumbo jet.</h2>
+      <p class="lead" data-a="3">The 747's upper deck is a small business cabin of its own: 32 seats in pairs, 2 and 2, quieter than downstairs. Pairs make it easy for a family. You two by the window, two kids across the aisle, the third right behind them.</p>
+      <div class="legend" data-a="4"><span><i></i>Parents</span><span><i class="k"></i>Kids</span></div>
+      <p class="small" data-a="5" style="margin-top:16px">Fully flat beds. Lufthansa's 747-8s joined the fleet from 2012. Upper deck seats depend on what is open when we ticket.</p>
+      <p class="credit" data-a="5">Seat map: AeroLOPA, Lufthansa Boeing 747-8 upper deck.</p>
+    </div>
+    <div class="mapbox" data-a="2">
+      <img src="assets/lh-747-upper-deck-map.jpg" alt="Lufthansa 747-8 upper deck seat map">
+      <div class="ring r1" style="left:31.9%;top:21.7%;width:17.5%;height:6.6%"><span class="lbl">Mom &amp; Dad</span></div>
+      <div class="ring kid r2" style="left:51.2%;top:21.7%;width:17.5%;height:6.6%"><span class="lbl">Kids</span></div>
+      <div class="ring kid r3" style="left:51.2%;top:31.3%;width:8.8%;height:6.3%"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-count>
+  <div class="wrap">
+    <div class="kicker" data-a="1">What the same trip costs online &middot; checked October 7, 2026</div>
+    <h2 data-a="2">Your exact dates, business class, five travelers.</h2>
+    <div class="bars">
+      <div class="bar" data-a="3"><div class="top"><span>Lowest Lufthansa business fare online</span><b>$5,781 / person</b></div><div class="track"><div class="fill" data-w="100"></div></div><div class="note">$28,905 for five. Sold by BusinessClass.com. One checked bag. The Chicago to Rome flight is on a United plane.</div></div>
+      <div class="bar" data-a="4"><div class="top"><span>Cheapest business fare online that includes checked bags</span><b>$5,707 / person</b></div><div class="track"><div class="fill" data-w="98.7"></div></div><div class="note">$28,533 for five. British Airways out through Chicago and London, home through Dallas.</div></div>
+      <div class="bar you" data-a="5"><div class="top"><span>Your TAP and Lufthansa itinerary</span><b>$4,710 / person</b></div><div class="track"><div class="fill" data-w="81.5"></div></div><div class="note" style="color:#d9bd86">$23,550 for five. Lie-flat both ways, home Sunday afternoon.</div></div>
+    </div>
+    <div class="row" data-a="6" style="align-items:flex-end;gap:18px">
+      <div><div class="small">Less for the five of you</div><div class="big" data-to="4983">$0</div></div>
+      <p class="small" style="max-width:420px">The one fare online at about your price, $4,711 through Justfly, allows carry-on bags only and stops overnight in Copenhagen for 15h 35m on the way home. It gets you to Memphis Monday night.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">Good to know before you book</div>
+    <h2 data-a="2">The fine print, in plain words.</h2>
+    <div class="cards">
+      <div class="card" data-a="3"><h5>Bags</h5><p>TAP business includes 2 checked bags per person up to 70 lb each. Your Lufthansa flights home include checked bags too. I will send you the exact count in writing before you pay.</p></div>
+      <div class="card warn" data-a="4"><h5>The Memphis to Chicago hops</h5><p>These are a separate American ticket. That is what keeps the price this low. You re-check bags in Chicago both ways, and American's normal bag fee applies on those two short flights.</p></div>
+      <div class="card" data-a="5"><h5>Price and seats</h5><p>$4,710 per person is today's price. Airline fares for five seats together can rise before ticketing, or hold. Nobody can promise which. Seats are assigned when we ticket.</p></div>
+    </div>
+    <p class="small" data-a="6" style="margin-top:22px">Business Tickets is a Florida Seller of Travel, ST43933, and IATA accredited, 10573570. Free cancellation within 24 hours of booking.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="bg" style="background-image:url(assets/tap-flatbed.jpg)"></div><div class="shade full"></div>
+  <div class="wrap" style="text-align:center">
+    <div class="kicker" data-a="1">Ready when you are</div>
+    <h2 data-a="2">Five flat beds to Italy.</h2>
+    <div data-a="3" style="margin-top:22px"><div class="price">$4,710 <small>per person</small></div><p class="small" style="margin-top:8px">$23,550 total for 5 &middot; Memphis to Rome June 26 &middot; Venice to Memphis July 4</p></div>
+    <div class="row" data-a="4" style="justify-content:center;margin-top:30px">
+      <a class="btn gold pulse" href="https://business-tickets.com/checkout-v2/xkAf3uLVfxXyOpnCPEUomOrnebQ1c9Af" target="_blank" rel="noopener">Book now</a>
+      <a class="btn ghost" href="sms:+16562693986?&amp;body=Hi%20Teddy%2C%20we%20like%20the%20TAP%20business%20option%20at%20%244%2C710." >Text Teddy</a>
+      <a class="btn ghost" href="tel:+16562693986">Call Teddy</a>
+    </div>
+    <p class="small" data-a="5" style="margin-top:18px">Book now opens your secure booking page with all five travelers. Teddy Myers &middot; +1 (656) 269-3986</p>
+    <div class="others" data-a="6" style="justify-content:center"><a href="#lh">See the all-Lufthansa option</a><a href="#ac">See the lower-price option</a></div>
+  </div>
+</section>
+</template>
+
+<!-- ====================== ALL LUFTHANSA (PQ 2150630) ====================== -->
+<template id="deck-lh">
+<section class="slide">
+  <div class="bg" style="background-image:url(assets/lh-window.jpg)"></div><div class="shade"></div>
+  <div class="wrap">
+    <div class="kicker" data-a="1">For Andy and family &middot; Italy, summer 2027</div>
+    <h1 data-a="2">In Rome by<br>10 AM Sunday.</h1>
+    <p class="lead" data-a="3">Lufthansa both ways, lie-flat over the Atlantic, through Munich on the way out and Frankfurt on the way home.</p>
+    <div class="row" data-a="4"><span class="pill">$5,183.12 per person</span><span class="pill">$25,915.60 for all five</span></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">Saturday, June 26</div>
+    <h2 data-a="2">Memphis to Rome in 17 hours.</h2>
+    <div class="tl">
+      <div class="leg" data-a="3"><div class="t">9:55 AM<small>Memphis</small></div><div><h4>Memphis to Chicago <span class="tag ec">Economy</span></h4><p>United Express. 1h 56m. Land 11:51 AM.</p></div></div>
+      <div class="stop" data-a="4"><div></div><div><strong>3h 44m in Chicago.</strong> A separate ticket: collect bags and check in with Lufthansa at Terminal 5.</div></div>
+      <div class="leg" data-a="5"><div class="t">3:35 PM<small>Chicago</small></div><div><h4>Chicago to Munich, LH 437 <span class="tag flat">Lie-flat business</span></h4><p>Overnight, 8h 30m in the air. Land 7:05 AM Sunday.</p></div></div>
+      <div class="stop" data-a="6"><div></div><div><strong>1h 20m in Munich.</strong> One of Europe's easiest airports to connect in.</div></div>
+      <div class="leg" data-a="7"><div class="t">8:25 AM<small>Munich</small></div><div><h4>Munich to Rome <span class="tag eu">European business</span></h4><p>Land Rome 10:00 AM Sunday, with the whole day ahead.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap split">
+    <div>
+      <div class="kicker" data-a="1">Sunday, July 4 &middot; home on the 747-8</div>
+      <h2 data-a="2">Upstairs on the jumbo jet.</h2>
+      <p class="lead" data-a="3">Venice 6:40 AM to Frankfurt, then Lufthansa 430 on the Boeing 747-8 to Chicago, lie-flat, landing 12:55 PM. United Express to Memphis at 3:35 PM, home 5:23 PM.</p>
+      <p class="lead" data-a="4">The upper deck is a 32-seat business cabin in pairs. Easy to keep the family together.</p>
+      <div class="legend" data-a="5"><span><i></i>Parents</span><span><i class="k"></i>Kids</span></div>
+      <p class="credit" data-a="5">Seat map: AeroLOPA. Seats are assigned at ticketing from what is open.</p>
+    </div>
+    <div class="mapbox" data-a="2">
+      <img src="assets/lh-747-upper-deck-map.jpg" alt="Lufthansa 747-8 upper deck seat map">
+      <div class="ring r1" style="left:31.9%;top:21.7%;width:17.5%;height:6.6%"><span class="lbl">Mom &amp; Dad</span></div>
+      <div class="ring kid r2" style="left:51.2%;top:21.7%;width:17.5%;height:6.6%"><span class="lbl">Kids</span></div>
+      <div class="ring kid r3" style="left:51.2%;top:31.3%;width:8.8%;height:6.3%"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">What it costs online &middot; checked October 7, 2026</div>
+    <h2 data-a="2">Lufthansa, your exact dates, five travelers.</h2>
+    <div class="bars">
+      <div class="bar" data-a="3"><div class="top"><span>Lowest Lufthansa business fare online</span><b>$5,781 / person</b></div><div class="track"><div class="fill" data-w="100"></div></div><div class="note">$28,905 for five. One checked bag, and that fare puts you on a United plane from Chicago to Rome.</div></div>
+      <div class="bar you" data-a="4"><div class="top"><span>Your Lufthansa itinerary</span><b>$5,183.12 / person</b></div><div class="track"><div class="fill" data-w="89.7"></div></div><div class="note" style="color:#d9bd86">$25,915.60 for five.</div></div>
+    </div>
+    <div data-a="5" style="margin-top:20px"><div class="small">Less for the five of you</div><div class="big" data-to="2989">$0</div></div>
+    <div class="card" data-a="6" style="margin-top:22px;max-width:760px"><h5>Compared with the TAP option</h5><p>This one costs $473.12 more per person. For that you land in Rome at 10:00 AM instead of 4:45 PM, with one short connection in Munich instead of four hours in Lisbon. The flight home is the same 747-8.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker" data-a="1">If this is the one</div>
+    <h2 data-a="2">Tell me and I will set it up.</h2>
+    <div data-a="3" style="margin-top:22px"><div class="price">$5,183.12 <small>per person</small></div><p class="small" style="margin-top:8px">$25,915.60 total for 5. The Memphis to Chicago flights are a separate ticket, with United's normal bag fee on them.</p></div>
+    <div class="row" data-a="4" style="justify-content:center;margin-top:30px">
+      <a class="btn gold pulse" href="sms:+16562693986?&amp;body=Hi%20Teddy%2C%20we%20would%20like%20the%20all-Lufthansa%20option%20at%20%245%2C183.12.">Choose this one</a>
+      <a class="btn ghost" href="tel:+16562693986">Call Teddy</a>
+    </div>
+    <p class="small" data-a="5" style="margin-top:18px">I will send your secure booking page for this option right away. Teddy Myers &middot; +1 (656) 269-3986</p>
+    <div class="others" data-a="6" style="justify-content:center"><a href="#tap">Back to the TAP option, $4,710</a><a href="#ac">See the lower-price option</a></div>
+  </div>
+</section>
+</template>
+
+<!-- ====================== AIR CANADA OUT, IBERIA HOME (PQ 2149822) ====================== -->
+<template id="deck-ac">
+<section class="slide">
+  <div class="bg" style="background-image:url(assets/tap-wine.jpg)"></div><div class="shade full"></div>
+  <div class="wrap">
+    <div class="kicker" data-a="1">For Andy and family &middot; the lower-price option</div>
+    <h1 data-a="2">Premium economy out.<br>A flat bed home.</h1>
+    <p class="lead" data-a="3">Air Canada premium economy to Rome, then Iberia business class from Venice through Madrid, and first class from Dallas to Memphis.</p>
+    <div class="row" data-a="4"><span class="pill">$4,281.40 per person</span><span class="pill">$21,407 for all five</span></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">Saturday, June 26</div>
+    <h2 data-a="2">Out through Newark and Montreal.</h2>
+    <div class="tl">
+      <div class="leg" data-a="3"><div class="t">6:00 AM<small>Memphis</small></div><div><h4>Memphis to Newark <span class="tag ec">Economy</span></h4><p>Air Canada ticket on a United Express jet. Land 9:47 AM.</p></div></div>
+      <div class="stop" data-a="4"><div></div><div><strong>4h 54m in Newark.</strong> One ticket the whole way, so your bags go straight through to Rome.</div></div>
+      <div class="leg" data-a="5"><div class="t">2:41 PM<small>Newark</small></div><div><h4>Newark to Montreal <span class="tag ec">Economy</span></h4><p>Land 4:21 PM, then 3h 04m in Montreal.</p></div></div>
+      <div class="leg" data-a="6"><div class="t">7:25 PM<small>Montreal</small></div><div><h4>Montreal to Rome, AC 892 <span class="tag pe">Premium economy</span></h4><p>Overnight. A wider seat with more recline and legroom, like a domestic first class seat. Not a flat bed. Land 9:15 AM Sunday.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">Sunday, July 4</div>
+    <h2 data-a="2">Home in business, then first.</h2>
+    <div class="tl">
+      <div class="leg" data-a="3"><div class="t">12:05 PM<small>Venice</small></div><div><h4>Venice to Madrid, Iberia <span class="tag eu">European business</span></h4><p>A relaxed late-morning start. Land 2:45 PM.</p></div></div>
+      <div class="stop" data-a="4"><div></div><div><strong>1h 10m in Madrid.</strong> Short, on one ticket, so your bags are handled for you.</div></div>
+      <div class="leg" data-a="5"><div class="t">3:55 PM<small>Madrid</small></div><div><h4>Madrid to Dallas, Iberia <span class="tag flat">Lie-flat business</span></h4><p>Airbus A330. Land 8:10 PM.</p></div></div>
+      <div class="stop" data-a="6"><div></div><div><strong>2h 20m in Dallas.</strong> US customs, then drop your bags back on.</div></div>
+      <div class="leg" data-a="7"><div class="t">10:30 PM<small>Dallas</small></div><div><h4>Dallas to Memphis, American <span class="tag flat">First class</span></h4><p>Land 12:04 AM Monday, July 5.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">The honest trade</div>
+    <h2 data-a="2">$428.60 less per person than TAP.</h2>
+    <div class="cards">
+      <div class="card" data-a="3"><h5>What you save</h5><p>$2,143 for the five of you, compared with the TAP and Lufthansa option.</p></div>
+      <div class="card warn" data-a="4"><h5>What you give up</h5><p>No bed on the overnight to Rome, a 6:00 AM start with two stops, and getting home after midnight instead of 5:36 PM.</p></div>
+      <div class="card" data-a="5"><h5>What you gain</h5><p>Bags go through on one ticket each way, and a later, easier start from Venice at 12:05 PM.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker" data-a="1">If this is the one</div>
+    <h2 data-a="2">Tell me and I will set it up.</h2>
+    <div data-a="3" style="margin-top:22px"><div class="price">$4,281.40 <small>per person</small></div><p class="small" style="margin-top:8px">$21,407 total for 5 &middot; Memphis to Rome June 26 &middot; Venice to Memphis July 4</p></div>
+    <div class="row" data-a="4" style="justify-content:center;margin-top:30px">
+      <a class="btn gold pulse" href="sms:+16562693986?&amp;body=Hi%20Teddy%2C%20we%20would%20like%20the%20Air%20Canada%20and%20Iberia%20option%20at%20%244%2C281.40.">Choose this one</a>
+      <a class="btn ghost" href="tel:+16562693986">Call Teddy</a>
+    </div>
+    <p class="small" data-a="5" style="margin-top:18px">I will send your secure booking page for this option right away. Teddy Myers &middot; +1 (656) 269-3986</p>
+    <div class="others" data-a="6" style="justify-content:center"><a href="#tap">See the TAP option, lie-flat both ways for $4,710</a><a href="#lh">See the all-Lufthansa option</a></div>
+  </div>
+</section>
+</template>
+
+<script>
+(function(){
+  var o=(location.hash.replace('#','')||'tap').toLowerCase();
+  if(!document.getElementById('deck-'+o)) o='tap';
+  var deck=document.getElementById('deck'), slides=[], i=0, timer=null;
+  function load(n){
+    o=n; if(timer) toggle();
+    deck.innerHTML=''; deck.appendChild(document.getElementById('deck-'+o).content.cloneNode(true));
+    slides=[].slice.call(deck.querySelectorAll('.slide')); i=0; slides[0].classList.add('on'); show(0);
+  }
+  var bar=document.getElementById('bar'), count=document.getElementById('count'), play=document.getElementById('play');
+  function money(n){return '$'+Math.round(n).toLocaleString('en-US')}
+  function runCounters(s){
+    s.querySelectorAll('[data-to]').forEach(function(el){
+      var to=+el.getAttribute('data-to'), t0=null, dur=1600;
+      function step(t){ if(!t0)t0=t; var k=Math.min(1,(t-t0)/dur); k=1-Math.pow(1-k,3); el.textContent=money(to*k); if(k<1) requestAnimationFrame(step); }
+      setTimeout(function(){requestAnimationFrame(step)},900);
+    });
+    s.querySelectorAll('.fill').forEach(function(f,n){ f.style.width='0'; setTimeout(function(){f.style.width=f.getAttribute('data-w')+'%'},500+n*250); });
+  }
+  function show(n){
+    n=Math.max(0,Math.min(slides.length-1,n));
+    slides[i].classList.remove('on'); i=n; slides[i].classList.add('on');
+    var w=slides[i].querySelector('.wrap'); if(w) w.scrollTop=0;
+    runCounters(slides[i]);
+    bar.style.width=((i+1)/slides.length*100)+'%';
+    count.textContent=(i+1)+' / '+slides.length;
+    if(timer && i===slides.length-1) toggle();
+  }
+  function toggle(){
+    if(timer){clearInterval(timer);timer=null;play.innerHTML='&#9654; Play';}
+    else{timer=setInterval(function(){show(i+1)},9000);play.innerHTML='&#10073;&#10073; Pause';}
+  }
+  document.getElementById('next').onclick=function(){show(i+1)};
+  document.getElementById('prev').onclick=function(){show(i-1)};
+  play.onclick=toggle;
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(i+1)}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1)}
+  });
+  var x0=null,y0=null;
+  deck.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+  deck.addEventListener('touchend',function(e){ if(x0===null)return; var dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0; if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)) show(i+(dx<0?1:-1)); x0=null;},{passive:true});
+  deck.addEventListener('click',function(e){
+    if(e.target.closest('a,button,.mapbox')) return;
+    if(window.innerWidth<860) return;
+    show(i+(e.clientX>window.innerWidth*0.5?1:-1));
+  });
+  load(o);
+  window.addEventListener('hashchange',function(){var n=(location.hash.replace('#','')||'tap').toLowerCase(); if(n!==o&&document.getElementById('deck-'+n)) load(n);});
+})();
+</script>
+
+</html>
