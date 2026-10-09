@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Robert's London Flights</title>
+<meta name="description" content="British Airways Club Suite, Denver to London nonstop, April 13 to 21, 2027, prepared for Robert Foster.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: full-screen slide deck. Palette: Oxford night navy, parchment, claret and brass. Deliberately single dark look. */
+:root{
+  color-scheme:dark;
+  --navy:#0f1726; --navy-2:#162033; --navy-3:#1f2a40;
+  --brass:#c8a96a; --brass-2:#dcc28f; --brass-deep:#a5823f;
+  --claret:#a33a3f; --claret-2:#c9575b;
+  --ink:#f5f0e6; --muted:#adb4c3; --dim:#7f889a;
+  --sky:#86b6e3; --ok:#86d3ad;
+  --bg:var(--navy);
+}
+*{box-sizing:border-box}
+body,h1,h2,h4,h5,p,ul{margin:0;padding:0}
+html,body{height:100%}
+body{animation:open 1.6s cubic-bezier(.4,0,.2,1) both;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+a{color:inherit}
+
+/* deck */
+.deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;overflow:hidden;transform:translateX(var(--off,40px)) scale(.99);transition:opacity 1.4s cubic-bezier(.4,0,.2,1),transform 1.8s cubic-bezier(.16,1,.3,1),visibility 0s linear 1.8s}
+.slide.on{opacity:1;visibility:visible;transform:none;transition:opacity 1.4s cubic-bezier(.4,0,.2,1) .15s,transform 1.8s cubic-bezier(.16,1,.3,1) .15s,visibility 0s}
+.bg{position:absolute;inset:-4%;background-size:cover;background-position:center;transform:scale(1.02);transition:transform 18s cubic-bezier(.25,.1,.25,1);will-change:transform}
+.slide.on .bg{transform:scale(1.12)}
+.shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,23,38,.95) 0%,rgba(15,23,38,.8) 42%,rgba(15,23,38,.22) 100%)}
+.shade.full{background:rgba(15,23,38,.76)}
+.wrap{position:relative;width:min(1180px,100%);padding:72px 56px 96px;max-height:100%;overflow-y:auto;scrollbar-width:none}
+.wrap::-webkit-scrollbar{display:none}
+
+/* entrance: slow, soft fades */
+[data-a]{opacity:0;transform:translateY(30px);filter:blur(10px);transition:opacity 1.6s cubic-bezier(.4,0,.2,1),transform 1.9s cubic-bezier(.16,1,.3,1),filter 1.5s ease}
+.slide.on [data-a]{opacity:1;transform:none;filter:none}
+.slide.on [data-a="1"]{transition-delay:.45s}.slide.on [data-a="2"]{transition-delay:.85s}
+.slide.on [data-a="3"]{transition-delay:1.25s}.slide.on [data-a="4"]{transition-delay:1.65s}
+.slide.on [data-a="5"]{transition-delay:2.05s}.slide.on [data-a="6"]{transition-delay:2.45s}
+.slide.on [data-a="7"]{transition-delay:2.85s}.slide.on [data-a="8"]{transition-delay:3.25s}
+
+.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);font-weight:700}
+h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:clamp(38px,6vw,76px);line-height:1.02;letter-spacing:-.005em;margin-top:14px;text-wrap:balance}
+h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:clamp(32px,4.4vw,54px);line-height:1.06;margin-top:12px;text-wrap:balance}
+.lead{font-size:clamp(17px,1.6vw,21px);line-height:1.55;color:#e2e5ec;margin-top:18px;max-width:650px}
+.small{font-size:13px;color:var(--muted);line-height:1.5}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:rgba(200,169,106,.14);border:1px solid rgba(200,169,106,.45);color:var(--brass-2);font-size:13px;font-weight:600}
+.pill.red{background:rgba(163,58,63,.22);border-color:rgba(201,87,91,.55);color:#f1c9c9}
+.row{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:28px;max-width:940px}
+.stat{background:rgba(31,42,64,.75);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 16px 14px;backdrop-filter:blur(6px)}
+.stat b{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:32px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted);line-height:1.4;display:block;margin-top:4px}
+
+/* timeline */
+.tl{margin-top:26px;max-width:780px;position:relative}
+.tl:before{content:"";position:absolute;left:105px;top:16px;bottom:16px;width:2px;background:linear-gradient(var(--brass),rgba(200,169,106,.12));transform:scaleY(0);transform-origin:top;transition:transform 3.4s cubic-bezier(.16,1,.3,1) 1s}
+.slide.on .tl:before{transform:scaleY(1)}
+.leg{display:grid;grid-template-columns:96px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.leg:last-child{border-bottom:0}
+.leg .t{font-weight:700;font-size:18px;color:#fff;font-variant-numeric:tabular-nums}
+.leg .t small{display:block;font-weight:500;font-size:12px;color:var(--dim);margin-top:2px}
+.leg h4{font-size:18px;font-weight:600;color:#fff}
+.leg p{font-size:14.5px;color:#d0d5df;line-height:1.5;margin-top:3px}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:6px;padding:3px 7px;margin-left:8px;vertical-align:2px}
+.tag.flat{background:rgba(134,211,173,.16);color:var(--ok)}
+.tag.bus{background:rgba(134,182,227,.16);color:var(--sky)}
+.stop{display:grid;grid-template-columns:96px 1fr;gap:18px;padding:10px 0}
+.stop div:last-child{background:rgba(200,169,106,.1);border-left:3px solid var(--brass);border-radius:6px;padding:9px 13px;font-size:14px;color:#ecdfc4;line-height:1.45}
+
+/* then and now */
+.versus{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+.col{border-radius:16px;padding:20px 22px;border:1px solid rgba(255,255,255,.09)}
+.col.then{background:rgba(31,42,64,.55)}
+.col.now{background:linear-gradient(160deg,rgba(200,169,106,.16),rgba(31,42,64,.75));border-color:rgba(200,169,106,.4)}
+.col h5{font-family:"Cormorant Garamond",Georgia,serif;font-size:26px;font-weight:700;color:#fff}
+.col h5 small{display:block;font-family:Inter,sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:2px}
+.col ul{list-style:none;margin-top:10px}
+.col li{padding:8px 0;font-size:15px;line-height:1.45;color:#dfe3ea;border-top:1px solid rgba(255,255,255,.07)}
+.col li:first-child{border-top:0}
+.col.then li{color:#b9bfcb}
+
+/* two column */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+.photo{border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45);position:relative}
+.photo img{display:block;width:100%;height:auto}
+.photo .cap{position:absolute;left:0;right:0;bottom:0;padding:10px 14px;font-size:11px;color:#d6dae2;background:linear-gradient(0deg,rgba(0,0,0,.65),transparent)}
+ul.ticks{list-style:none;margin-top:20px}
+ul.ticks li{position:relative;padding:8px 0 8px 30px;font-size:16px;line-height:1.45;color:#e4e7ed}
+ul.ticks li:before{content:"";position:absolute;left:2px;top:13px;width:14px;height:8px;border-left:2.5px solid var(--brass);border-bottom:2.5px solid var(--brass);transform:rotate(-45deg)}
+
+/* seat map, drawn nose to the left */
+.mapscroll{margin-top:22px;overflow-x:auto;border-radius:16px;scrollbar-width:thin}
+.mapbox{position:relative;width:100%;min-width:640px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.mapbox img{display:block;width:100%;height:auto}
+.ring{position:absolute;border-radius:10px;border:3px solid var(--claret);opacity:0;transform:scale(.6);transition:opacity 1s ease,transform 1.2s cubic-bezier(.2,.9,.3,1.3)}
+.ring.alt{border-color:var(--brass-deep);border-style:dashed}
+.slide.on .ring{opacity:1;transform:none;animation:pulse 2.8s ease-out 3.4s infinite}
+.slide.on .ring.r1{transition-delay:1.8s}.slide.on .ring.r2{transition-delay:2.6s}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(163,58,63,.55)}70%{box-shadow:0 0 0 14px rgba(163,58,63,0)}100%{box-shadow:0 0 0 0 rgba(163,58,63,0)}}
+.ring .lbl{position:absolute;left:50%;top:-30px;transform:translateX(-50%);white-space:nowrap;background:var(--claret);color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px}
+.ring.alt .lbl{background:var(--brass-deep);top:auto;bottom:-30px}
+.zone{position:absolute;border:2px solid rgba(163,58,63,.55);background:rgba(163,58,63,.06);border-radius:12px;opacity:0;transition:opacity 1.4s ease 1.2s}
+.slide.on .zone{opacity:1}
+.credit{font-size:11px;color:var(--dim);margin-top:10px}
+.maptext{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+.maptext p{font-size:14.5px;line-height:1.5;color:#dfe3ea}
+.maptext b{color:#fff}
+
+/* route */
+.route{width:100%;max-width:1060px;margin-top:14px}
+.route path.arc{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 2.6s cubic-bezier(.45,0,.55,1)}
+.slide.on .route path.arc{stroke-dashoffset:0}
+.slide.on .route path.d1{transition-delay:1.2s}.slide.on .route path.d2{transition-delay:3.8s}.slide.on .route path.d3{transition-delay:4.6s}
+.route path.coach{stroke-dasharray:5 7!important;stroke-dashoffset:0!important;opacity:0;transition:opacity 1.2s ease 4.2s}
+.slide.on .route path.coach{opacity:1}
+.route circle{fill:#fff}
+.route text{font:600 16px Inter,sans-serif;fill:#eceef3}
+.route text.c{font-size:13px;font-weight:500;fill:var(--muted)}
+.keyrow{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;color:#dfe3ea;margin-top:4px}
+.keyrow i{display:inline-block;width:26px;height:3px;border-radius:2px;vertical-align:middle;margin-right:8px}
+.plane{opacity:0;transition:opacity .4s ease}
+.plane path{fill:#fff}
+
+/* price compare */
+.bars{margin-top:24px;max-width:880px}
+.bar{margin:14px 0}
+.bar .top{display:flex;justify-content:space-between;gap:12px;font-size:15px;color:#e4e7ed}
+.bar .top b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar .track{height:14px;background:rgba(255,255,255,.07);border-radius:999px;margin-top:7px;overflow:hidden}
+.bar .fill{height:100%;width:0;border-radius:999px;background:#5c6579;transition:width 2.2s cubic-bezier(.16,1,.3,1)}
+.bar.you .fill{background:linear-gradient(90deg,var(--brass-deep),var(--brass-2))}
+.bar.you .top{color:#fff;font-weight:700}
+.bar .note{font-size:12.5px;color:var(--dim);margin-top:5px;line-height:1.4}
+.big{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:clamp(54px,9vw,108px);line-height:1;color:var(--brass-2);font-variant-numeric:tabular-nums}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:26px}
+.card{background:rgba(31,42,64,.82);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:18px}
+.card h5{font-size:16px;color:#fff;font-weight:700}
+.card p{font-size:14px;color:#d0d5df;line-height:1.5;margin-top:6px}
+.card .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);font-weight:700;margin-bottom:6px}
+
+/* videos */
+.vids{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+.vid{display:block;text-decoration:none;background:rgba(31,42,64,.82);border:1px solid rgba(255,255,255,.09);border-radius:14px;overflow:hidden;transition:transform .2s ease,border-color .2s ease}
+.vid:hover{transform:translateY(-3px);border-color:var(--brass)}
+.vid .th{position:relative;aspect-ratio:16/9;background-size:cover;background-position:center;max-width:100%}
+.vid .th:after{content:"";position:absolute;left:50%;top:50%;width:54px;height:38px;margin:-19px 0 0 -27px;border-radius:10px;background:rgba(15,23,38,.82) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7l8 5-8 5z' fill='%23fff'/%3E%3C/svg%3E") center/26px no-repeat}
+.vid .tx{padding:11px 13px 13px}
+.vid b{display:block;font-size:14px;color:#fff;line-height:1.35}
+.vid span{display:block;font-size:12px;color:var(--muted);margin-top:4px}
+.score{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px}
+.score .card{flex:1 1 260px}
+.score .num{font-family:"Cormorant Garamond",Georgia,serif;font-size:40px;font-weight:700;color:var(--brass-2);line-height:1}
+
+/* CTA */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:17px 30px;border-radius:12px;font-weight:700;font-size:18px;text-decoration:none;transition:transform .15s ease,box-shadow .2s ease;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.btn.gold{background:var(--brass);color:var(--navy);box-shadow:0 12px 34px rgba(200,169,106,.35)}
+.btn.ghost{border:2px solid rgba(255,255,255,.5);color:#fff}
+.btn.gold.pulse{animation:cta 2.4s ease-in-out 1.6s infinite}
+@keyframes cta{0%,100%{box-shadow:0 12px 34px rgba(200,169,106,.35)}50%{box-shadow:0 12px 50px rgba(200,169,106,.72)}}
+.price{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(48px,7vw,84px);font-weight:700;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.price small{font-family:Inter,sans-serif;font-size:18px;font-weight:500;color:var(--muted)}
+
+/* chrome */
+.top-bar{position:fixed;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;padding:16px 24px;z-index:5;pointer-events:none}
+.top-bar img{height:26px;width:auto;pointer-events:auto}
+.top-bar .who{font-size:12px;color:var(--muted);letter-spacing:.06em}
+.nav{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;gap:14px;padding:14px 22px calc(14px + env(safe-area-inset-bottom,0px));z-index:5;background:linear-gradient(0deg,rgba(15,23,38,.92),rgba(15,23,38,0))}
+.nav button{appearance:none;border:1px solid rgba(255,255,255,.22);background:rgba(31,42,64,.88);color:#fff;border-radius:10px;height:42px;min-width:42px;padding:0 14px;font:600 14px Inter,sans-serif;cursor:pointer}
+.nav button:hover{border-color:var(--brass)}
+.nav button.playing{background:var(--brass);color:var(--navy);border-color:var(--brass)}
+.progress{flex:1;height:4px;background:rgba(255,255,255,.12);border-radius:4px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--brass);transition:width .6s cubic-bezier(.16,1,.3,1)}
+.timer{position:fixed;left:0;right:0;bottom:0;height:3px;z-index:6;pointer-events:none}
+.timer i{display:block;height:100%;width:0;background:var(--brass-2)}
+.timer.run i{animation:tick var(--dur,8s) linear forwards}
+@keyframes open{from{opacity:0}to{opacity:1}}
+@keyframes tick{from{width:0}to{width:100%}}
+.count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:48px;text-align:right}
+.hint{position:fixed;right:24px;bottom:72px;font-size:12px;color:var(--dim);z-index:5}
+
+@media (max-width:860px){
+  .wrap{padding:64px 16px 104px}
+  .split{grid-template-columns:1fr;gap:22px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cards,.vids,.maptext,.versus{grid-template-columns:1fr}
+  .leg,.stop{grid-template-columns:72px 1fr;gap:12px}
+  .tl:before{left:77px}
+  .shade{background:linear-gradient(0deg,rgba(15,23,38,.97) 0%,rgba(15,23,38,.88) 50%,rgba(15,23,38,.2) 80%,rgba(15,23,38,.35) 100%)}
+  .slide:has(.shade:not(.full)){align-items:flex-end}
+  .hint{display:none}
+  .btn{width:100%}
+  .route text{font-size:24px}.route text.c{font-size:19px}
+}
+@media (prefers-reduced-motion:reduce){
+  /* keep the soft fades, drop movement */
+  [data-a]{transform:none;filter:none}
+  .slide,.slide.on{transform:none}
+  .bg,.slide.on .bg{transform:none}
+  .btn.gold.pulse,.slide.on .ring{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <img src="assets/bt-logo.png" alt="Business Tickets">
+  <div class="who">Prepared for Robert Foster by Teddy Myers</div>
+</div>
+
+<main class="deck" id="deck"></main>
+
+<div class="hint">Use &larr; &rarr; or tap the sides</div>
+<div class="timer" id="timer"><i></i></div>
+<nav class="nav">
+  <button id="prev" aria-label="Previous slide">&larr;</button>
+  <button id="play" aria-label="Play slideshow">&#9654; Play</button>
+  <div class="progress"><i id="bar"></i></div>
+  <div class="count" id="count">1 / 1</div>
+  <button id="next" aria-label="Next slide">&rarr;</button>
+</nav>
+
+<!-- ====================== BRITISH AIRWAYS BA218 / BA219 (PQ 2154907) ====================== -->
+<template id="deck-ba">
+<section class="slide">
+  <div class="bg" style="background-image:url(assets/ba-a350-1000.jpg);background-position:62% center"></div><div class="shade"></div>
+  <div class="wrap">
+    <div class="kicker" data-a="1">For Robert Foster &middot; Denver to London &middot; April 2027</div>
+    <h1 data-a="2">Twenty years on,<br>British Airways Club<br>comes with a door.</h1>
+    <p class="lead" data-a="3">Nonstop from Denver on Tuesday, April 13. Home nonstop on Wednesday, April 21. A lie-flat suite of your own both ways, on British Airways' Airbus A350-1000.</p>
+    <div class="row" data-a="4"><span class="pill">$4,699 round trip</span><span class="pill red">$945 under British Airways' own price</span></div>
+    <p class="small" data-a="5" style="margin-top:22px">Photo: AVA Navigate, CC BY-SA 4.0, Wikimedia Commons.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">The trip at a glance</div>
+    <h2 data-a="2">Denver to Heathrow, no stops. Oxford by coach.</h2>
+    <svg class="route" viewBox="0 0 1200 330" data-a="3" aria-label="Route map from Denver to London Heathrow and on to Oxford">
+      <path id="rOut" class="arc d1" style="--len:1150" stroke="#c8a96a" d="M120 250 Q 560 -40 1010 185"/>
+      <path id="rHome" class="arc d2" style="--len:1150" stroke="#86b6e3" d="M1010 200 Q 560 420 120 262"/>
+      <path class="arc coach" stroke="#f5f0e6" d="M1010 185 Q 1010 140 1082 112"/>
+      <circle cx="120" cy="256" r="7"/><text x="62" y="300">Denver</text>
+      <circle cx="1010" cy="192" r="7"/><text x="905" y="236">Heathrow</text>
+      <circle cx="1082" cy="112" r="6"/><text x="1098" y="118">Oxford</text>
+      <g class="plane" data-delay="1200"><path d="M-11,-1.6 L5,-1.6 L11,0 L5,1.6 L-11,1.6 Z M-1,-1.6 L-6,-10 L-2.5,-10 L5,-1.6 Z M-1,1.6 L-6,10 L-2.5,10 L5,1.6 Z M-11,-1.6 L-13,-5 L-10.5,-5 L-8,-1.6 Z M-11,1.6 L-13,5 L-10.5,5 L-8,1.6 Z"/><animateMotion dur="2.6s" begin="indefinite" fill="freeze" rotate="auto" calcMode="spline" keyTimes="0;1" keySplines=".45 0 .55 1"><mpath href="#rOut"/></animateMotion></g>
+      <g class="plane" data-delay="3800"><path d="M-11,-1.6 L5,-1.6 L11,0 L5,1.6 L-11,1.6 Z M-1,-1.6 L-6,-10 L-2.5,-10 L5,-1.6 Z M-1,1.6 L-6,10 L-2.5,10 L5,1.6 Z M-11,-1.6 L-13,-5 L-10.5,-5 L-8,-1.6 Z M-11,1.6 L-13,5 L-10.5,5 L-8,1.6 Z"/><animateMotion dur="2.6s" begin="indefinite" fill="freeze" rotate="auto" calcMode="spline" keyTimes="0;1" keySplines=".45 0 .55 1"><mpath href="#rHome"/></animateMotion></g>
+      <text class="c" x="470" y="78">BA218 overnight, lie-flat</text>
+      <text class="c" x="470" y="318">BA219 in daylight, lie-flat</text>
+    </svg>
+    <div class="keyrow" data-a="4"><span><i style="background:#c8a96a"></i>Tuesday, April 13 out</span><span><i style="background:#86b6e3"></i>Wednesday, April 21 home</span><span><i style="background:#f5f0e6"></i>Coach to Oxford, about 85 minutes</span></div>
+    <div class="stats">
+      <div class="stat" data-a="5"><b>8h 55m</b><span>nonstop to London, overnight in a flat bed</span></div>
+      <div class="stat" data-a="6"><b>56</b><span>Club Suites on the plane, every one with its own aisle</span></div>
+      <div class="stat" data-a="7"><b>79 in</b><span>of flat bed. Plenty of room at 5 ft 10 in</span></div>
+      <div class="stat" data-a="8"><b>$945</b><span>less than booking these flights with British Airways</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">Your flights</div>
+    <h2 data-a="2">Out overnight. Home by 4:30 in the afternoon.</h2>
+    <div class="tl">
+      <div class="leg" data-a="3"><div class="t">6:40 PM<small>Tue, Apr 13</small></div><div><h4>Denver to London Heathrow, BA218 <span class="tag flat">Club Suite</span></h4><p>Airbus A350-1000, nonstop, 8h 55m. Dinner after take-off, then the seat goes fully flat.</p></div></div>
+      <div class="leg" data-a="4"><div class="t">10:35 AM<small>Wed, Apr 14</small></div><div><h4>Land at Heathrow Terminal 5</h4><p>British Airways' own terminal. Breakfast and a shower in the Arrivals Lounge, then the coach to Oxford.</p></div></div>
+      <div class="stop" data-a="5"><div></div><div><strong>Eight days in England.</strong> Time with your son in Oxford, and room for the tours you mentioned.</div></div>
+      <div class="leg" data-a="6"><div class="t">1:35 PM<small>Wed, Apr 21</small></div><div><h4>London Heathrow to Denver, BA219 <span class="tag flat">Club Suite</span></h4><p>Airbus A350-1000, nonstop, 9h 55m in daylight. Lunch, a film, a nap whenever you like.</p></div></div>
+      <div class="leg" data-a="7"><div class="t">4:30 PM<small>Wed, Apr 21</small></div><div><h4>Home in Denver</h4><p>Same day, with the evening still yours.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">You last flew British Airways business around 2006</div>
+    <h2 data-a="2">Here is what has changed since then.</h2>
+    <div class="versus">
+      <div class="col then" data-a="3">
+        <h5><small>Then</small>Club World, about 2006</h5>
+        <ul>
+          <li>Seats in side-by-side pairs, half of them facing backwards.</li>
+          <li>The window seat stepped over the aisle passenger's footrest to get out.</li>
+          <li>Your trip connected through Houston.</li>
+          <li>Heathrow Terminal 5 did not exist yet.</li>
+        </ul>
+      </div>
+      <div class="col now" data-a="4">
+        <h5><small>Now</small>Club Suite, April 2027</h5>
+        <ul>
+          <li>Your own suite with a door that closes, introduced on the A350-1000 in 2019.</li>
+          <li>Every seat opens straight to the aisle. Nobody climbs over anybody.</li>
+          <li>Nonstop from Denver, on one of the newest jets in the fleet.</li>
+          <li>Terminal 5, British Airways' home at Heathrow since 2008, with an Arrivals Lounge for the morning you land.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="small" data-a="5" style="margin-top:18px">The part you loved is still there: British Airways brought back its full restaurant-style Club dinner service in 2022.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap split">
+    <div>
+      <div class="kicker" data-a="1">The aircraft &middot; Airbus A350-1000</div>
+      <h2 data-a="2">A new plane, both ways.</h2>
+      <ul class="ticks">
+        <li data-a="3"><strong>Both your flights are on it.</strong> BA218 and BA219 are scheduled on the A350-1000, checked October 9, 2026.</li>
+        <li data-a="4"><strong>British Airways has flown it since 2019.</strong> It is one of the youngest jets in the fleet, exactly the newer aircraft you asked for.</li>
+        <li data-a="5"><strong>Built to be quiet.</strong> Airbus designed the A350 cabin to be one of the quietest of any twin-aisle jet.</li>
+        <li data-a="6"><strong>56 Club Suites</strong> in a 1-2-1 layout, then premium economy and economy behind.</li>
+      </ul>
+    </div>
+    <div class="photo" data-a="3"><img src="assets/ba-a350-sky.jpg" alt="British Airways Airbus A350-1000 in flight"><div class="cap">British Airways A350-1000. Photo: Acroterion, CC BY-SA 4.0, Wikimedia Commons</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap split">
+    <div class="photo" data-a="3"><img src="assets/club-suite.jpg" alt="British Airways Club Suite seat with its door"><div class="cap">A British Airways Club Suite. Photo: MatJarosz, CC BY-SA 4.0, Wikimedia Commons</div></div>
+    <div>
+      <div class="kicker" data-a="1">Your seat &middot; the Club Suite</div>
+      <h2 data-a="2">A small private room over the Atlantic.</h2>
+      <ul class="ticks">
+        <li data-a="3"><strong>A door that slides shut.</strong> Close it after dinner and the cabin goes away.</li>
+        <li data-a="4"><strong>A fully flat bed, 79 inches long.</strong> That is 6 ft 7 in. Room to spare at 5 ft 10 in, and even at the 6 ft 1 in you started out at.</li>
+        <li data-a="5"><strong>Direct aisle access</strong> from every seat, so you get up when you want without waking anyone.</li>
+        <li data-a="6"><strong>Window seats face the window,</strong> angled away from the aisle for privacy.</li>
+        <li data-a="7"><strong>A personal screen, storage at your side</strong> and a Club amenity kit for the night.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">Where I would seat you &middot; the Club cabin, nose to the left</div>
+    <h2 data-a="2">Seat 16A: a window, in the quiet little cabin.</h2>
+    <div class="mapscroll" data-a="3">
+      <div class="mapbox">
+        <img src="assets/ba-a350-1000-club-map.jpg" alt="British Airways A350-1000 Club Suite seat map, 56 suites in a 1-2-1 layout">
+        <div class="zone" style="left:83.3%;top:19.5%;width:14.3%;height:61%"></div>
+        <div class="ring r1" style="left:88.6%;top:66.6%;width:5.1%;height:11.6%"><span class="lbl">16A, my pick</span></div>
+        <div class="ring alt r2" style="left:88.6%;top:21.1%;width:5.1%;height:11.6%"><span class="lbl">or 16K</span></div>
+      </div>
+    </div>
+    <div class="maptext">
+      <p data-a="4"><b>Rows 15 to 17</b> are a separate mini cabin of just 12 suites, behind the galley. Fewer people walk past.</p>
+      <p data-a="5"><b>Row 16 window seats</b> sit away from the bassinet spots in row 15 and the galley noise up front.</p>
+      <p data-a="6"><b>Seats are chosen at booking</b> from what is open that day. I will ask for 16A first, then 16K or 17A.</p>
+    </div>
+    <p class="credit" data-a="6">Seat map: AeroLOPA, British Airways Airbus A350-1000. On a phone, swipe the map sideways.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="bg" style="background-image:url(assets/denver.jpg)"></div><div class="shade full"></div>
+  <div class="wrap">
+    <div class="kicker" data-a="1">Lounges, start to finish</div>
+    <h2 data-a="2">A quiet room before, and a shower after.</h2>
+    <div class="cards">
+      <div class="card" data-a="3"><div class="k">Denver &middot; before BA218</div><h5>United Club, Concourse A</h5><p>Denver airport lists free entry for British Airways Club passengers on BA218. The Admirals Club in Concourse C is open to you too.</p></div>
+      <div class="card" data-a="4"><div class="k">Heathrow &middot; the morning you land</div><h5>British Airways Arrivals Lounge</h5><p>Right after customs at Terminal 5. A hot shower and a full English breakfast until noon. Open 5 AM to 2 PM, and you land at 10:35.</p></div>
+      <div class="card" data-a="5"><div class="k">Heathrow &middot; going home</div><h5>British Airways Club lounges, Terminal 5</h5><p>Lunch and a quiet seat before your 1:35 PM flight. Club tickets include lounge access.</p></div>
+    </div>
+    <p class="small" data-a="6" style="margin-top:20px">Lounge rules from Denver International Airport and British Airways, checked October 9, 2026. Photo: Denver International Airport at dusk, Peterquinn925, CC BY-SA 4.0.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap split">
+    <div>
+      <div class="kicker" data-a="1">On board</div>
+      <h2 data-a="2">You remembered the food and a proper breakfast.</h2>
+      <p class="lead" data-a="3">That is still the British Airways way. On the overnight from Denver you get dinner after take-off, then breakfast before London. On the day flight home it is a full lunch and afternoon service.</p>
+      <p class="lead" data-a="4">Restaurant-style Club dining came back in 2022, with British ingredients and a menu that changes with the seasons.</p>
+    </div>
+    <div class="photo" data-a="3"><img src="assets/club-kit.jpg" alt="British Airways Club amenity kit on a Club Suite pillow"><div class="cap">The British Airways Club amenity kit. Photo: British Airways media centre</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="bg" style="background-image:url(assets/oxford.jpg)"></div><div class="shade"></div>
+  <div class="wrap">
+    <div class="kicker" data-a="1">Heathrow to Oxford, as you asked</div>
+    <h2 data-a="2">No tube. No Paddington.<br>One coach, straight to Oxford.</h2>
+    <div class="tl">
+      <div class="leg" data-a="3"><div class="t">10:35 AM<small>Heathrow T5</small></div><div><h4>Land, clear customs</h4><p>Take your time in the Arrivals Lounge: shower, breakfast, coffee.</p></div></div>
+      <div class="leg" data-a="4"><div class="t">12:10 PM<small>Stand 10</small></div><div><h4>"the airline" coach to Oxford <span class="tag bus">Oxford Bus Company</span></h4><p>Leaves from stand 10 on the Terminal 5 arrivals level. Around midday one leaves every 20 minutes, so any time you are ready works.</p></div></div>
+      <div class="leg" data-a="5"><div class="t">1:35 PM<small>Oxford</small></div><div><h4>Arrive Gloucester Green, central Oxford</h4><p>About 85 minutes. Two suitcases go under the coach. Pay the driver by contactless card, or book a seat ahead at theairline.co.uk.</p></div></div>
+      <div class="stop" data-a="6"><div></div><div><strong>Going home on April 21:</strong> the 9:10 AM coach from Gloucester Green reaches Terminal 5 at 10:35 AM, three hours before your flight.</div></div>
+    </div>
+    <p class="small" data-a="7" style="margin-top:14px">Times from the Oxford Bus Company timetable in force since July 2026. I will recheck it the week before you fly. Photo: Radcliffe Camera, Julian Herzog, CC BY 4.0.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">Don't just take my word for it</div>
+    <h2 data-a="2">Ratings, reviews and videos.</h2>
+    <div class="score">
+      <div class="card" data-a="3"><div class="num">4 stars</div><p>Skytrax rates British Airways a 4-star airline. Its main criticism is the old Club World seat still on some older planes. Both your flights have the new Club Suite.</p></div>
+      <div class="card" data-a="4"><div class="num">9 / 10</div><p>A traveler on this exact flight, BA218 Denver to London on the A350-1000, scored the cabin 9 out of 10 on Flight-Report and enjoyed the lamb main course.</p></div>
+    </div>
+    <div class="vids">
+      <a class="vid" data-a="5" href="https://www.youtube.com/watch?v=RsSDWemV0QI" target="_blank" rel="noopener"><div class="th" style="background-image:url(assets/yt-RsSDWemV0QI.jpg)"></div><div class="tx"><b>British Airways A350 Club Suite, full flight review</b><span>Luxury Travel Expert &middot; posted this summer</span></div></a>
+      <a class="vid" data-a="6" href="https://www.youtube.com/watch?v=i8RQp9t5Xuc" target="_blank" rel="noopener"><div class="th" style="background-image:url(assets/yt-i8RQp9t5Xuc.jpg)"></div><div class="tx"><b>British Airways business class: has it improved?</b><span>Travel Tall &middot; a tall traveler's view of the Club Suite</span></div></a>
+      <a class="vid" data-a="7" href="https://www.youtube.com/watch?v=1UsLbJ1qzz8" target="_blank" rel="noopener"><div class="th" style="background-image:url(assets/yt-1UsLbJ1qzz8.jpg)"></div><div class="tx"><b>The A350 Club Suite, walked through</b><span>Business Traveller magazine</span></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">The same two flights, priced online &middot; checked October 9, 2026</div>
+    <h2 data-a="2">BA218 out April 13, BA219 home April 21, Club.</h2>
+    <div class="bars">
+      <div class="bar" data-a="3"><div class="top"><span>Booking directly with British Airways</span><b>$5,644</b></div><div class="track"><div class="fill" data-w="100"></div></div><div class="note">The price Kayak shows for britishairways.com.</div></div>
+      <div class="bar" data-a="4"><div class="top"><span>Lowest online price sold as British Airways flights</span><b>$5,054</b></div><div class="track"><div class="fill" data-w="89.5"></div></div><div class="note">Same planes, same seats, through an online agency.</div></div>
+      <div class="bar" data-a="5"><div class="top"><span>Lowest online price for these planes, any seller</span><b>$4,973</b></div><div class="track"><div class="fill" data-w="88.1"></div></div><div class="note">Sold under Finnair flight numbers on the same British Airways planes.</div></div>
+      <div class="bar you" data-a="6"><div class="top"><span>Your price with Business Tickets</span><b>$4,699</b></div><div class="track"><div class="fill" data-w="83.3"></div></div><div class="note" style="color:#dcc28f">Every price above includes 2 checked bags, like yours.</div></div>
+    </div>
+    <div class="row" data-a="7" style="align-items:flex-end;gap:18px">
+      <div><div class="small">Less than booking with British Airways</div><div class="big" data-to="945">$0</div></div>
+      <p class="small" style="max-width:420px">You told me you had seen about $5,400 yourself. This is the same nonstop, the same suite, for less.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="kicker" data-a="1">Is it all right to book before your son's schedule is final?</div>
+    <h2 data-a="2">Yes, and here is why.</h2>
+    <div class="cards">
+      <div class="card" data-a="3"><div class="k">Your dates</div><h5>They sit inside his time at Oxford</h5><p>You said he is there from about April 1 to mid-May. April 13 to 21 falls well inside that, with days free for your own tours.</p></div>
+      <div class="card" data-a="4"><div class="k">If his dates move</div><h5>Optional Flexible Ticket, $516.89</h5><p>Add it on the booking page and both the airline's and our change fees are waived for any reason. You would only pay a fare difference, if there is one. It is used once and is not refundable.</p></div>
+      <div class="card" data-a="5"><div class="k">The price</div><h5>Held only until we ticket</h5><p>This price comes from a limited set of seats on these two flights. Until the ticket is issued it can go up or disappear, and nobody can promise which.</p></div>
+    </div>
+    <p class="small" data-a="6" style="margin-top:22px">Business Tickets is a Florida Seller of Travel, ST43933, and IATA accredited, 10573570.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="bg" style="background-image:url(assets/club-suite-window.jpg)"></div><div class="shade full"></div>
+  <div class="wrap" style="text-align:center">
+    <div class="kicker" data-a="1">Ready when you are</div>
+    <h2 data-a="2">Your suite to London.</h2>
+    <div data-a="3" style="margin-top:22px"><div class="price">$4,699 <small>round trip</small></div><p class="small" style="margin-top:8px">British Airways Club Suite &middot; Denver to London April 13 &middot; London to Denver April 21 &middot; 2 checked bags</p></div>
+    <div class="row" data-a="4" style="justify-content:center;margin-top:30px">
+      <a class="btn gold pulse" id="book" href="sms:+16562693986?&amp;body=Hi%20Teddy%2C%20it%27s%20Robert.%20Please%20book%20the%20British%20Airways%20flights%20to%20London%2C%20April%2013%20to%2021." target="_blank" rel="noopener">Book now</a>
+      <a class="btn ghost" href="tel:+16562693986">Call Teddy</a>
+    </div>
+    <p class="small" data-a="5" style="margin-top:18px">Book now opens your secure booking page. Teddy Myers &middot; +1 (656) 269-3986 &middot; teddy@business-tickets.com</p>
+    <p class="small" data-a="6" style="margin-top:6px">Photo: Club Suite window seat, BrayLockBoy, CC BY-SA 4.0, Wikimedia Commons.</p>
+  </div>
+</section>
+</template>
+
+<script>
+(function(){
+  // Secure booking page for PQ 2154907. Leave empty to fall back to a text to Teddy.
+  var BOOK_URL='';
+  var o='ba';
+  var deck=document.getElementById('deck'), slides=[], i=0;
+  var bar=document.getElementById('bar'), count=document.getElementById('count'), play=document.getElementById('play');
+  var DUR=11000, playing=false, tmo=null, timerEl=document.getElementById('timer');
+  function load(n){
+    o=n; if(playing) toggle();
+    deck.innerHTML=''; deck.appendChild(document.getElementById('deck-'+o).content.cloneNode(true));
+    var b=deck.querySelector('#book'); if(b&&BOOK_URL){ b.href=BOOK_URL; }
+    slides=[].slice.call(deck.querySelectorAll('.slide')); i=0; slides[0].classList.add('on'); show(0);
+  }
+  function money(n){return '$'+Math.round(n).toLocaleString('en-US')}
+  function runCounters(s){
+    s.querySelectorAll('[data-to]').forEach(function(el){
+      var to=+el.getAttribute('data-to'), t0=null, dur=2400;
+      function step(t){ if(!t0)t0=t; var k=Math.min(1,(t-t0)/dur); k=1-Math.pow(1-k,3); el.textContent=money(to*k); if(k<1) requestAnimationFrame(step); }
+      setTimeout(function(){requestAnimationFrame(step)},3200);
+    });
+    s.querySelectorAll('.fill').forEach(function(f,n){ f.style.width='0'; setTimeout(function(){f.style.width=f.getAttribute('data-w')+'%'},1500+n*400); });
+  }
+  function planes(sl){
+    sl.querySelectorAll('.plane').forEach(function(g){
+      g.style.opacity=0; var a=g.querySelector('animateMotion');
+      setTimeout(function(){ if(!sl.classList.contains('on')) return; g.style.opacity=1; try{a.beginElement()}catch(e){} }, +g.getAttribute('data-delay'));
+    });
+  }
+  function startTimer(){
+    clearTimeout(tmo); timerEl.classList.remove('run'); void timerEl.offsetWidth;
+    if(!playing) return;
+    timerEl.style.setProperty('--dur',DUR+'ms'); timerEl.classList.add('run');
+    tmo=setTimeout(function(){ if(i<slides.length-1) show(i+1); else toggle(); },DUR);
+  }
+  function show(n){
+    n=Math.max(0,Math.min(slides.length-1,n));
+    var dir=n>=i?1:-1, cur=slides[i], nxt=slides[n];
+    if(n!==i){
+      cur.style.setProperty('--off',(-dir*60)+'px'); cur.classList.remove('on');
+      nxt.style.transition='none'; nxt.style.setProperty('--off',(dir*60)+'px'); void nxt.offsetWidth; nxt.style.transition='';
+    }
+    i=n; nxt.classList.add('on');
+    var w=nxt.querySelector('.wrap'); if(w) w.scrollTop=0;
+    var ms=nxt.querySelector('.mapscroll'); if(ms) ms.scrollLeft=ms.scrollWidth;
+    runCounters(nxt); planes(nxt);
+    bar.style.width=((i+1)/slides.length*100)+'%';
+    count.textContent=(i+1)+' / '+slides.length;
+    startTimer();
+  }
+  function toggle(){
+    playing=!playing;
+    play.classList.toggle('playing',playing);
+    play.innerHTML=playing?'&#10073;&#10073; Pause':'&#9654; Play';
+    play.setAttribute('aria-label',playing?'Pause slideshow':'Play slideshow');
+    if(playing && i===slides.length-1) show(0); else startTimer();
+  }
+  document.getElementById('next').onclick=function(){show(i+1)};
+  document.getElementById('prev').onclick=function(){show(i-1)};
+  play.onclick=toggle;
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(i+1)}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1)}
+    if(e.key==='p'||e.key==='P'){toggle()}
+  });
+  var x0=null,y0=null;
+  deck.addEventListener('touchstart',function(e){ if(e.target.closest('.mapscroll')){x0=null;return} x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+  deck.addEventListener('touchend',function(e){ if(x0===null)return; var dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0; if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)) show(i+(dx<0?1:-1)); x0=null;},{passive:true});
+  deck.addEventListener('click',function(e){
+    if(e.target.closest('a,button,.mapscroll')) return;
+    if(window.innerWidth<860) return;
+    show(i+(e.clientX>window.innerWidth*0.5?1:-1));
+  });
+  load(o);
+})();
+</script>
+</body>
+</html>
